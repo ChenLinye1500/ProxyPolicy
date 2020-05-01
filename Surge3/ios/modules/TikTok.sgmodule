@@ -3,9 +3,11 @@
 #!system=ios
 
 [URL Rewrite]
-(.video_id=\w{32})(.watermark=)(.*) $1 302
-(?<=(carrier|sys)_region=)CN JP 307
+#TikTok解锁日区
+(?<=_region=)CN(?=&) JP 307
+(?<=&app_version=)15..(?=.?.?&) 1 307
+(?<=\?version_code=)15..(?=.?.?&) 1 307
 
 [MITM]
-skip-server-cert-verify = true
-hostname = *.tiktokcdn.com, api*.tiktokv.com, api*.musical.ly, api*.amemv.com, aweme*.snasdk.com
+hostname = %APPEND% *.snssdk.com, *.amemv.com, *.musical.ly
+
